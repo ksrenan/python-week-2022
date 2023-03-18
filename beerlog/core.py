@@ -1,25 +1,19 @@
-from typing import Optional, List
+from typing import List
+
 from sqlmodel import select
+
 from beerlog.database import get_session
 from beerlog.models import Beer
 
 
-def add_user_to_database(
-    name: str,
-    style: str,
-    flavor: int,
-    image: int,
-    cost: int
+def add_beer_to_database(
+    name: str, style: str, flavor: int, image: int, cost: int
 ) -> bool:
     with get_session() as session:
         beer = Beer(
-            name=name,
-            style=style,
-            flavor=flavor,
-            image=image,
-            cost=cost
+            name=name, style=style, flavor=flavor, image=image, cost=cost
         )
-        session.add(beer) # INSERT INTO beer ...
+        session.add(beer)  # INSERT INTO beer ...
         session.commit()
     return True
 
